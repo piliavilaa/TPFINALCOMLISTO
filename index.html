@@ -1,0 +1,277 @@
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TP FINAL</title>
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.css"/>
+    <div id="app"></div>
+  </head>
+
+  <body>
+    <h1 class="text-center">Trabajo Práctico Final Simulación</h1>
+    <h2 class="text-center">Modelos de Simulación Dinámicos - Ejercicio 329</h2>
+
+    <div class="container">
+
+      <h2>Parámetros:</h2>
+      <form>
+        <div class="row mb-3 mx-3">
+          <div class="col-md">
+            <label class="form-label" for="txtCantNros">Cantidad de eventos (N): </label>
+            <input
+              type="number"
+              class="form-control form-control-sm mb-3 tamanio"
+              id="txtCantNros"
+              name="txtCantNros"
+            />
+          </div>
+
+          <div class="col-md">
+            <label class="form-label" for="txtEventoDesde">Evento desde:</label>
+            <input
+              type="number"
+              class="form-control form-control-sm mb-3 tamanio"
+              id="txtEventoDesde"
+              name="txtEventoDesde"
+            />
+          </div>
+        </div>
+      </form>
+
+      <h2>Eventos:</h2>
+      <form>
+        <div class="row mb-3 mx-3">
+          <div class="col-md">
+            <label class="form-label" for="txtLlegadaPacientes"> <b>Llegada de paciente al hospital: Exponencial (µ)</b> </label>
+            <input
+              type="number"
+              class="form-control form-control-sm mb-3 tamanio"
+              id="txtMediaLlegadaPacientes"
+              name="txtMediaLlegadaPacientes"
+              placeholder="5"
+              value="5"
+            />
+          </div>
+        </div>
+
+        <div class="row mb-3 mx-3">
+          <div class="col-md">
+            <label class="form-label" for="txtFinDeDeterminacion"> <b>Fin de determinación: Uniforme (A)</b>  </label>
+              <input
+              type="number"
+              class="form-control form-control-sm mb-3 tamanio"
+              id="txtAFinDeDeterminacion"
+              name="txtAFinDeDeterminacion"
+              placeholder="1"
+              value="1"/>
+          </div>
+          <div class="col-md">
+            <label class="form-label" for="txtFinDeDeterminacion"><b>(B)</b></label>
+            <input
+              type="number"
+              class="form-control form-control-sm mb-3 tamanio"
+              id="txtBFinDeDeterminacion"
+              name="txtBFinDeDeterminacion"
+              placeholder="3"
+              value="3"/>
+          </div>
+        </div>
+
+
+        <div class="row mb-3 mx-3">
+          <div class="col-md">
+            <label class="form-label" for="txtFinDeAutorizacion"> <b>Fin de autorización: Uniforme (A)</b>  </label>
+              <input
+              type="number"
+              class="form-control form-control-sm mb-3 tamanio"
+              id="txtAFinDeAutorizacion"
+              name="txtAFinDeAutorizacion"
+              placeholder="2"
+              value="2"/>
+          </div>
+          <div class="col-md">
+            <label class="form-label" for="txtFinDeAutorizacion"><b>(B)</b></label>
+            <input
+              type="number"
+              class="form-control form-control-sm mb-3 tamanio"
+              id="txtBFinDeAutorizacion"
+              name="txtBFinDeAutorizacion"
+              placeholder="14"
+              value="14"/>
+          </div>
+        </div>
+
+
+        <div class="row mb-3 mx-3">
+          <div class="col-md">
+            <label class="form-label" for="txtFinDeAntencion"> <b>Fin de atención: Uniforme (A)</b>  </label>
+              <input
+              type="number"
+              class="form-control form-control-sm mb-3 tamanio"
+              id="txtAFinDeAntencion"
+              name="txtAFinDeAntencion"
+              placeholder="9"
+              value="9"/>
+          </div>
+          <div class="col-md">
+            <label class="form-label" for="txtFinDeAntencion"><b>(B)</b></label>
+            <input
+              type="number"
+              class="form-control form-control-sm mb-3 tamanio"
+              id="txtBFinDeAntencion"
+              name="txtBFinDeAntencion"
+              placeholder="21"
+              value="21"/>
+          </div>
+        </div>
+
+
+        <div class="row mb-3 mx-3">
+          <div class="col-md">
+            <label class="form-label" for="txtFinDePago"> <b>Fin de pago: Uniforme (A)</b>  </label>
+              <input
+              type="number"
+              class="form-control form-control-sm mb-3 tamanio"
+              id="txtAFinDePago"
+              name="txtAFinDePago"
+              placeholder="2.5"
+              value="2.5"/>
+          </div>
+          <div class="col-md">
+            <label class="form-label" for="txtFinDePago"><b>(B)</b></label>
+            <input
+              type="number"
+              class="form-control form-control-sm mb-3 tamanio"
+              id="txtBFinDePago"
+              name="txtBFinDePago"
+              placeholder="3.5"
+              value="3.5"/>
+          </div>
+        </div>
+
+        <div class="row mb-3 mx-3">
+          <button class="btn btn-dark mb-2 mx-2 form-control form-control-sm"
+            id="btnSimular"
+            type="button"
+            name="btnSimular">
+            <span class="spinner-border spinner-border-sm" role="status" id="spinner" hidden></span>
+            Simular
+          </button>
+        </div>
+      
+      </form>
+    </div>
+
+    <div id="divTablaSimulacion">
+      <div class="container">
+        <h2>Tabla de probabilidad del tipo de paciente: </h2>
+        <table class="table table-hover table-responsive table-bordered mx-3 mb-3">
+          <tr>
+            <th>Tipo De Paciente</th>
+            <th>P()</th>
+            <th>P() AC</th>
+            <th>Desde</th>
+            <th>Hasta</th>
+          </tr>
+          <tr>
+            <td>Urgente</td>
+            <td>0,4</td>
+            <td>0,4</td>
+            <td>0,00</td>
+            <td>0,39</td>
+          </tr>
+          <tr>
+            <td>Comun</td>
+            <td>0,6</td>
+            <td>1,00</td>
+            <td>0,40</td>
+            <td>0,99</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="table-responsive scrollable row mb-3 mx-3">
+        <table id="tablaSimulacion" class="table table-hover table-bordered mx-3 mb-3">
+          <thead>
+            <tr>
+              <th rowspan="2">N° Evento</th>
+              <th rowspan="2">Evento</th>
+              <th rowspan="2">Reloj (min.)</th>
+              <th colspan="3">Llegada paciente</th>
+              <th colspan="5">Fin de determinacion</th>
+              <th colspan="3">Fin de autorización</th>
+              <th colspan="4">Fin de atención i</th>
+              <th colspan="3">Fin de pago</th>
+              <th colspan="2">Enfermero</th>
+              <th colspan="2">Obra</th>
+              <th colspan="6">Medico i</th>
+              <th colspan="6">Variables estadísticas</th>
+            </tr>
+              
+            </tr>  
+              <!-- Tiempo entre llegadas -->
+              <th>RND Tiempo Entre Llegadas</th>
+              <th>Tiempo Entre Llegadas</th>
+              <th style="color: red">Próxima Llegada</th>
+
+              <!-- Tiempo de determinación -->
+              <th>RND Tiempo Determinación</th>
+              <th>Tiempo Determinación</th>
+              <th style="color: red">Fin de determinación</th>
+              <th>RND tipo de paciente</th>
+              <th>Tipo de paciente</th>
+
+              <!-- Tiempo de autorización -->
+              <th>RND tiempo de autorización</th>
+              <th>Tiempo de autorización</th>
+              <th style="color: red">Fin de autorización</th>
+
+              <!-- Tiempo de atención -->
+              <th>RND tiempo de atención</th>
+              <th>Tiempo de atención</th>
+              <th style="color: red">Fin de atención 1</th>
+              <th style="color: red">Fin de atención 2</th>
+
+              <!-- Tiempo de pago -->
+              <th>RND tiempo de pago</th>
+              <th>Tiempo de pago</th>
+              <th style="color: red">Fin de pago</th>
+
+              <!-- Enfermero -->
+              <th>Estado enfermero</th>
+              <th>Cola enfermero</th>
+
+              <!-- Obra -->
+              <th>Estado obra</th>
+              <th>Cola obra</th>
+
+              <!-- Medicos -->
+              <th>Estado Medico 1</th>
+              <th>Estado Medico 2</th>
+              <th>Cola de pacientes comunes</th>
+              <th>Cola de pacientes urgentes</th>
+              <th>Tiempo de remanencia 1 paciente comun</th>
+              <th>Tiempo de remanencia 2 paciente comun</th>
+
+              <!-- Variables estadísticas -->
+              <th>Cantidad maxima de pacientes en sala de espera</th>
+              <th>Acumulador tiempo de espera pacientes urgentes</th>
+              <th>Cantidad de pacientes urgentes atendidos</th>
+              <th>Acumulador tiempo de espera pacientes comunes</th>
+              <th>Cantidad de pacientes comunes atendidos</th>
+              <th>Acumulador de dinero de atención</th>
+
+              <!-- Agregar las columnas correspondientes a los pasajeros -->
+            </tr>
+          </thead>
+
+          <tbody id="bodyTablaSimulacion">
+          </tbody>
+
+        </table>
+      </div>
+    </div>
+
+  </body>
+</html>
