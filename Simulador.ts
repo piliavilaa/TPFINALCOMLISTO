@@ -23,9 +23,14 @@ export class Simulador {
   public tiposPacientes: string[];
   public cantEnSala: number;
   public cantidadMax: number;
+  public acuEsperaPacientesUrgentes: number;
+  public totalPacientesUrgente: number;
   public tiempoMaximoUrgente: number;
+  public acuEsperaPacientesComunes: number;
+  public totalPacientesComun: number;
   public tiempoMaximoComun: number;
   public dineroAcumulado: number;
+
 
   //-------------------Metodo simular
 
@@ -117,12 +122,14 @@ export class Simulador {
     //Variables estadisticas
     this.cantEnSala = 0;
     this.cantidadMax = 0;
-    let acuEsperaPacientesUrgentes: number = 0;
-    let totalPacientesUrgente: number = 0;
-    let acuEsperaPacientesComunes: number = 0;
-    let totalPacientesComun: number = 0;
-    this.dineroAcumulado = 0;
     let pacienteEnObra: number = 0;
+    this.acuEsperaPacientesUrgentes = 0;
+    this.totalPacientesUrgente  = 0;
+    this.tiempoMaximoUrgente = 0;
+    this.acuEsperaPacientesComunes = 0;
+    this.totalPacientesComun  = 0;
+    this.tiempoMaximoComun = 0;
+    this.dineroAcumulado = 0;
     let totalPacientes: number = 0;
     this.cantMaxPacientes = 0;
 
@@ -246,7 +253,8 @@ export class Simulador {
             (paciente) =>
               paciente.getEstado() == EstadoPaciente.SIENDO_AUTORIZADO
           );
-
+          let tiempoEspera =  reloj - pacienteAutorizado.getMinutoLlegada();
+          
           //paciente comun
           if (pacienteAutorizado.getTipoPaciente() == 'Comun') {
             //medico 1 libre
@@ -256,6 +264,14 @@ export class Simulador {
               rndAntencion = Math.random();
               tiempoAtencion = this.getTiempoAtencion(rndAntencion);
               finAtencion1 = reloj + tiempoAtencion;
+
+              this.acuEsperaPacientesComunes += tiempoEspera;
+              this.totalPacientesComun += 1;
+              if (tiempoEspera > this.tiempoMaximoComun)
+                {
+                  this.tiempoMaximoComun = tiempoEspera;
+                }
+
             } else {
               if (medico2.estaLibre()) {
                 //medico 2 libre y el uno no esta libre
@@ -264,6 +280,14 @@ export class Simulador {
                 rndAntencion = Math.random();
                 tiempoAtencion = this.getTiempoAtencion(rndAntencion);
                 finAtencion2 = reloj + tiempoAtencion;
+                
+                this.acuEsperaPacientesComunes += tiempoEspera;
+                this.totalPacientesComun += 1;
+                if (tiempoEspera > this.tiempoMaximoComun)
+                {
+                  this.tiempoMaximoComun = tiempoEspera;
+                }
+
               } else {
                 //el medico 1 y el medico 2 estan ocupados
                 colaMedicosComun.push(pacienteAutorizado);
@@ -288,6 +312,8 @@ export class Simulador {
               rndAntencion = Math.random();
               tiempoAtencion = this.getTiempoAtencion(rndAntencion);
               finAtencion1 = reloj + tiempoAtencion;
+              this.acuEsperaPacientesUrgentes += (reloj - pacienteAutorizado.getMinutoLlegada())
+              this.totalPacientesUrgente+=1;
             }
             //3 - El medico 1 esta con comun y el dos ocupado, se va con el 1
             else if (
@@ -309,6 +335,8 @@ export class Simulador {
               rndAntencion = Math.random();
               tiempoAtencion = this.getTiempoAtencion(rndAntencion);
               finAtencion1 = tiempoAtencion + reloj;
+              this.acuEsperaPacientesUrgentes += (reloj - pacienteAutorizado.getMinutoLlegada())
+              this.totalPacientesUrgente+=1;
             }
             //4 - medico 2 esta libre, se va con el 2
             else if (medico2.estaLibre()) {
@@ -317,6 +345,8 @@ export class Simulador {
               rndAntencion = Math.random();
               tiempoAtencion = this.getTiempoAtencion(rndAntencion);
               finAtencion2 = reloj + tiempoAtencion;
+              this.acuEsperaPacientesUrgentes += (reloj - pacienteAutorizado.getMinutoLlegada())
+              this.totalPacientesUrgente+=1;
             }
             //5 - medico 2 esta atendiendo comun y el 1 a urgencia, se va con el 2
             else if (
@@ -337,6 +367,8 @@ export class Simulador {
               rndAntencion = Math.random();
               tiempoAtencion = this.getTiempoAtencion(rndAntencion);
               finAtencion2 = reloj + tiempoAtencion;
+              this.acuEsperaPacientesUrgentes += (reloj - pacienteAutorizado.getMinutoLlegada())
+              this.totalPacientesUrgente+=1;
             }
           }
 
@@ -360,9 +392,7 @@ export class Simulador {
             (paciente) =>
               paciente.getEstado() == EstadoPaciente.SIENDO_ATENDIDO1
           );
-          //calculo tiempo de espera
-          if (pacienteAtendido.getTipoPaciente() == 'Comun') {
-          }
+
           //vemos si el enfermero esta ocupado
           if (enfermero.estaOcupado()) {
             pacienteAtendido.esperandoPago();
@@ -384,7 +414,12 @@ export class Simulador {
             rndAntencion = Math.random();
             tiempoAtencion = this.getTiempoAtencion(rndAntencion);
             finAtencion1 = reloj + tiempoAtencion;
+
+            this.acuEsperaPacientesUrgentes +=
+              reloj - pacienteIngresa.getMinutoLlegada();
+            this.totalPacientesUrgente += 1;
           }
+
           //hay alguno interrumpido
           else if (tiempoRemanencia1 > -1) {
             let pacienteInterrupido1: Paciente = pacientesEnSistema.find(
@@ -403,6 +438,10 @@ export class Simulador {
             rndAntencion = Math.random();
             tiempoAtencion = this.getTiempoAtencion(rndAntencion);
             finAtencion1 = reloj + tiempoAtencion;
+
+            this.acuEsperaPacientesComunes +=
+              reloj - pacienteIngresa.getMinutoLlegada();
+            this.totalPacientesComun += 1;
           }
           //esta libre no hay nadie para atender
           else {
@@ -419,6 +458,16 @@ export class Simulador {
             (pacienteAtendido) =>
               pacienteAtendido.getEstado() == EstadoPaciente.SIENDO_ATENDIDO2
           );
+          //calculo tiempo de espera
+          if (pacienteAtendido.getTipoPaciente() == 'Comun') {
+            this.acuEsperaPacientesComunes +=
+              reloj - pacienteAtendido.getMinutoLlegada();
+            this.totalPacientesComun += 1;
+          } else {
+            this.acuEsperaPacientesUrgentes +=
+              reloj - pacienteAtendido.getMinutoLlegada();
+            this.totalPacientesUrgente += 1;
+          }
 
           //vemos si el enfermero esta ocupado
           if (enfermero.estaOcupado()) {
@@ -441,6 +490,8 @@ export class Simulador {
             rndAntencion = Math.random();
             tiempoAtencion = this.getTiempoAtencion(rndAntencion);
             finAtencion2 = reloj + tiempoAtencion;
+            this.acuEsperaPacientesUrgentes += (reloj - pacienteIngresa.getMinutoLlegada())
+              this.totalPacientesUrgente+=1;
           }
           //hay alguno interrumpido
           else if (tiempoRemanencia2 > -1) {
@@ -460,6 +511,8 @@ export class Simulador {
             rndAntencion = Math.random();
             tiempoAtencion = this.getTiempoAtencion(rndAntencion);
             finAtencion2 = reloj + tiempoAtencion;
+            this.acuEsperaPacientesComunes += (reloj - pacienteIngresa.getMinutoLlegada())
+              this.totalPacientesComun+=1;
           }
           //esta libre no hay nadie para atender
           else {
@@ -590,10 +643,12 @@ export class Simulador {
 
           this.cantEnSala.toString(),
           this.cantidadMax.toString(),
-          acuEsperaPacientesUrgentes.toFixed(4),
-          totalPacientesUrgente.toFixed(4),
-          acuEsperaPacientesComunes.toFixed(4),
-          totalPacientesComun.toFixed(4),
+          this.acuEsperaPacientesUrgentes.toFixed(4),
+          this.totalPacientesUrgente.toString(),
+          this.tiempoMaximoUrgente.toFixed(4),
+          this.acuEsperaPacientesComunes.toFixed(4),
+          this.totalPacientesComun.toString(),
+          this.tiempoMaximoComun.toFixed(4),
           this.dineroAcumulado.toString()
         );
 
@@ -691,6 +746,18 @@ export class Simulador {
     let tiempo: number =
       this.aTiempoPago + rndTiempoPago * (this.bTiempoPago - this.aTiempoPago);
     return tiempo;
+  }
+
+  public getPromedioUrgentes():number
+  {
+    let promedioU : number = this.acuEsperaPacientesUrgentes / this.totalPacientesUrgente;
+    return promedioU;
+  }
+
+  public getPromedioComunes():number
+  {
+    let promedioC : number = this.acuEsperaPacientesComunes / this.totalPacientesComun;
+    return promedioC;
   }
 
   public getSiguienteEvento(tiemposEventos: number[]): Evento {

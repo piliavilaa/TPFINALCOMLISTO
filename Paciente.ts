@@ -69,6 +69,10 @@ export class Paciente {
     return this.id;
   }
 
+  public getMinutoLlegada(): number {
+    return this.minuto;
+  }
+
   public getTipoPaciente(): string {
     return this._tipoPaciente;
   }

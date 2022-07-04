@@ -84,8 +84,10 @@ let AFinPago: number;
 let BFinPago: number;
 
 //-----------------------Definición para las metricas.
-let dinero: number;
 let cantidadEnSala: number;
+let promedioU: number;
+let promedioC: number;
+let dinero: number;
 
 //-----------------------Funcionalidad------------------------------------------------
 //-----------------------Disparamos la simulación.
@@ -145,13 +147,16 @@ const simular = () => {
   HTMLUtils.mostrarSeccion(divTablaSimulacion);
 
   //Definiciones de metricas
+  cantidadEnSala = simulador.cantidadMax;
+  promedioU = simulador.getPromedioUrgentes();
+  promedioC = simulador.getPromedioComunes();
   dinero = simulador.dineroAcumulado;
-  cantidadEnSala = simulador.cantEnSala;
 
   //Cargamos las metricas
   document.getElementById('txtCantSala').innerHTML += cantidadEnSala.toString();
+  document.getElementById('txtPromedioU').innerHTML += promedioU.toFixed(4);
+  document.getElementById('txtPromedioC').innerHTML += promedioC.toFixed(4);
   document.getElementById('txtRecaudacion').innerHTML += dinero.toString();
- 
 };
 
 //-----------------------Metodo de validación de los parámetros del usuario.
