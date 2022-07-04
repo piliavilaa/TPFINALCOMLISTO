@@ -158,10 +158,10 @@ const simular = () => {
 
   //Cargamos las metricas
   document.getElementById('txtCantSala').innerHTML += cantidadEnSala.toString();
-  document.getElementById('txtTiempoMaxU').innerHTML += tiempoMaxU.toFixed(4);
-  document.getElementById('txtPromedioU').innerHTML += promedioU.toFixed(4);
-  document.getElementById('txtTiempoMaxC').innerHTML += tiempoMaxC.toFixed(4);
-  document.getElementById('txtPromedioC').innerHTML += promedioC.toFixed(4);
+  document.getElementById('txtTiempoMaxU').innerHTML += tiempoMaxU.toFixed(4) + 's';
+  document.getElementById('txtPromedioU').innerHTML += promedioU.toFixed(4) + 's';
+  document.getElementById('txtTiempoMaxC').innerHTML += tiempoMaxC.toFixed(4) + 's';
+  document.getElementById('txtPromedioC').innerHTML += promedioC.toFixed(4) + 's';
   document.getElementById('txtRecaudacion').innerHTML += dinero.toString();
 };
 
