@@ -86,7 +86,9 @@ let BFinPago: number;
 //-----------------------Definición para las metricas.
 let cantidadEnSala: number;
 let promedioU: number;
+let tiempoMaxU: number;
 let promedioC: number;
+let tiempoMaxC: number;
 let dinero: number;
 
 //-----------------------Funcionalidad------------------------------------------------
@@ -149,12 +151,16 @@ const simular = () => {
   //Definiciones de metricas
   cantidadEnSala = simulador.cantidadMax;
   promedioU = simulador.getPromedioUrgentes();
+  tiempoMaxU = simulador.tiempoMaximoUrgente;
   promedioC = simulador.getPromedioComunes();
+  tiempoMaxC = simulador.tiempoMaximoComun;
   dinero = simulador.dineroAcumulado;
 
   //Cargamos las metricas
   document.getElementById('txtCantSala').innerHTML += cantidadEnSala.toString();
+  document.getElementById('txtTiempoMaxU').innerHTML += tiempoMaxU.toFixed(4);
   document.getElementById('txtPromedioU').innerHTML += promedioU.toFixed(4);
+  document.getElementById('txtTiempoMaxC').innerHTML += tiempoMaxC.toFixed(4);
   document.getElementById('txtPromedioC').innerHTML += promedioC.toFixed(4);
   document.getElementById('txtRecaudacion').innerHTML += dinero.toString();
 };
