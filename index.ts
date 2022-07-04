@@ -50,7 +50,12 @@ const tablaSimulacion: HTMLTableElement = document.getElementById(
 const cantEncabezadosTablaSimulacion = tablaSimulacion.rows[0].cells.length;
 const cantSubEncabezadosTablaSimulacion = tablaSimulacion.rows[1].cells.length;
 const indicesEventosCandidatos: number[] = [5, 8, 13, 16, 17, 20];
-const colPacientes: string[] = ['ID Paciente', 'Tipo Paciente', 'Estado', 'Minuto de llegada a sala de espera'];
+const colPacientes: string[] = [
+  'ID Paciente',
+  'Tipo Paciente',
+  'Estado',
+  'Minuto de llegada a sala de espera',
+];
 
 //-----------------------Ocultamos la seccion en donde esta la tabla.
 HTMLUtils.ocultarSeccion(divTablaSimulacion);
@@ -79,6 +84,8 @@ let AFinPago: number;
 let BFinPago: number;
 
 //-----------------------Definición para las metricas.
+let dinero: number;
+let cantidadEnSala: number;
 
 //-----------------------Funcionalidad------------------------------------------------
 //-----------------------Disparamos la simulación.
@@ -137,7 +144,14 @@ const simular = () => {
   );
   HTMLUtils.mostrarSeccion(divTablaSimulacion);
 
+  //Definiciones de metricas
+  dinero = simulador.dineroAcumulado;
+  cantidadEnSala = simulador.cantEnSala;
+
   //Cargamos las metricas
+  document.getElementById('txtCantSala').innerHTML += cantidadEnSala.toString();
+  document.getElementById('txtRecaudacion').innerHTML += dinero.toString();
+ 
 };
 
 //-----------------------Metodo de validación de los parámetros del usuario.

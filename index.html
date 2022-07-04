@@ -206,7 +206,7 @@
               <th colspan="2">Enfermero</th>
               <th colspan="2">Obra</th>
               <th colspan="6">Medico i</th>
-              <th colspan="6">Variables estadísticas</th>
+              <th colspan="7">Variables estadísticas</th>
             </tr>
               
             </tr>  
@@ -255,6 +255,7 @@
               <th>Tiempo de remanencia 2 paciente comun</th>
 
               <!-- Variables estadísticas -->
+              <th>Cantidad de pacientes en sala de espera</th>
               <th>Cantidad maxima de pacientes en sala de espera</th>
               <th>Acumulador tiempo de espera pacientes urgentes</th>
               <th>Cantidad de pacientes urgentes atendidos</th>
@@ -277,22 +278,22 @@
     <h2>Metricas:</h2>
     <form>
       <div class="row mb-3 mx-3">
-          <label class="form-label" for="txtCantNros">-->Cola máxima en sala de espera:</label>
+          <label class="form-label" for="txtCantSala" id="txtCantSala">-->Cola máxima en sala de espera: </label>
       </div>
       <div class="row mb-3 mx-3">
-        <label class="form-label" for="txtCantNros">-->Tiempo máximo de espera para un paciente urgente: </label>
+        <label class="form-label" for="txtTiempoMaxU" id="txtTiempoMaxU">-->Tiempo máximo de espera para un paciente urgente: </label>
       </div>
       <div class="row mb-3 mx-3">
-        <label class="form-label" for="txtCantNros">-->Tiempo promedio de espera para un paciente urgente:</label>
+        <label class="form-label" for="txtPromedioU" id="txtPromedioU">-->Tiempo promedio de espera para un paciente urgente: </label>
       </div>
       <div class="row mb-3 mx-3">
-        <label class="form-label" for="txtCantNros">-->Tiempo máximo de espera para un paciente común: </label>
+        <label class="form-label" for="txtTiempoMaxC" id="txtTiempoMaxC">-->Tiempo máximo de espera para un paciente común: </label>
       </div>
       <div class="row mb-3 mx-3">
-        <label class="form-label" for="txtCantNros">-->Tiempo promedio de espera para un paciente común:</label>
+        <label class="form-label" for="txtPromedioC" id="txtPromedioC">-->Tiempo promedio de espera para un paciente común: </label>
       </div>
       <div class="row mb-3 mx-3">
-        <label class="form-label" for="txtCantNros">-->Dinero acumulado en la simulación:</label>
+        <label class="form-label" for="txtRecaudacion" id="txtRecaudacion">-->Dinero acumulado en la simulación: $</label>
       </div>
     </form>
 

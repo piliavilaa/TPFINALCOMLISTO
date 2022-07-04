@@ -21,8 +21,10 @@ export class Simulador {
   public cantMaxPacientes: number;
   public probTiposPacientes: number[];
   public tiposPacientes: string[];
+  public cantEnSala: number;
+  public cantidadMax: number;
+  public tiempoMaximoUrgente: number;
   public tiempoMaximoComun: number;
-  public tiempoMaixmoUrgente: number;
   public dineroAcumulado: number;
 
   //-------------------Metodo simular
@@ -113,12 +115,14 @@ export class Simulador {
     let pacientesEnSistema: Paciente[] = [];
 
     //Variables estadisticas
-    let cantidadMaxEnSala: number = 0;
+    this.cantEnSala = 0;
+    this.cantidadMax = 0;
     let acuEsperaPacientesUrgentes: number = 0;
     let totalPacientesUrgente: number = 0;
     let acuEsperaPacientesComunes: number = 0;
     let totalPacientesComun: number = 0;
     this.dineroAcumulado = 0;
+    let pacienteEnObra: number = 0;
     let totalPacientes: number = 0;
     this.cantMaxPacientes = 0;
 
@@ -525,6 +529,22 @@ export class Simulador {
         }
       }
 
+      // Calculo de metricas
+      if (obra.estaOcupado()) {
+        pacienteEnObra = 1;
+      } else {
+        pacienteEnObra = 0;
+      }
+      this.cantEnSala =
+        colaMedicosComun.length +
+        colaMedicosUrgencia.length +
+        colaObraSocial.length +
+        pacienteEnObra;
+
+      if (this.cantEnSala > this.cantidadMax) {
+        this.cantidadMax = this.cantEnSala;
+      }
+
       // Cargamos la matriz de estado a mostrar solo para el rango pasado por parámetro.
       if ((i >= eventoDesde && i <= indiceHasta) || i == cantEventos - 1) {
         evento.push(
@@ -568,7 +588,8 @@ export class Simulador {
           tiempoRemanencia1.toFixed(4),
           tiempoRemanencia2.toFixed(4),
 
-          cantidadMaxEnSala.toFixed(4),
+          this.cantEnSala.toString(),
+          this.cantidadMax.toString(),
           acuEsperaPacientesUrgentes.toFixed(4),
           totalPacientesUrgente.toFixed(4),
           acuEsperaPacientesComunes.toFixed(4),
