@@ -18,8 +18,8 @@ export class Paciente {
     this.estado = EstadoPaciente.SIENDO_DETERMINADO;
   }
 
-  public esperandoAutorizacion(): void {
-    this.estado = EstadoPaciente.ESPERANDO_AUTORIZACION;
+  public siendoAutorizado(): void {
+    this.estado = EstadoPaciente.SIENDO_AUTORIZADO;
   }
 
   public esperandoAtencion(): void {

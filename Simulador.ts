@@ -195,7 +195,7 @@ export class Simulador {
           //Vemos si la obra social esta disponible
           if (obra.estaLibre()) {
             obra.ocupado();
-            pacienteAtendido.esperandoAutorizacion();
+            pacienteAtendido.siendoAutorizado();
             // calculo el fin de autorizacion
             rndAutorizacion = Math.random();
             tiempoAutorizacion = this.getTiempoAutorizacion(rndAutorizacion);
@@ -232,11 +232,11 @@ export class Simulador {
 
         case Evento.FIN_AUTORIZACION: {
           finAutorizacion = -1;
-          //--------PARA EL PACIENTE QUE ESTABA ESPERANDO_AUTORIZACION
+          //--------PARA EL PACIENTE QUE ESTABA SIENDO_AUTORIZADO
           // Buscamos el paciente atendido y le asignamos el tipo.
           let pacienteAutorizado: Paciente = pacientesEnSistema.find(
             (paciente) =>
-              paciente.getEstado() == EstadoPaciente.ESPERANDO_AUTORIZACION
+              paciente.getEstado() == EstadoPaciente.SIENDO_AUTORIZADO
           );
 
           //paciente comun
@@ -337,7 +337,7 @@ export class Simulador {
             obra.libre();
           } else {
             let pacienteIngresa: Paciente = colaObraSocial.shift();
-            pacienteIngresa.esperandoAutorizacion();
+            pacienteIngresa.siendoAutorizado();
             rndAutorizacion = Math.random();
             tiempoAutorizacion = this.getTiempoAutorizacion(rndAutorizacion);
             finAutorizacion = reloj + tiempoAutorizacion;
