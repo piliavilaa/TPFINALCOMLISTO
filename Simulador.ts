@@ -25,7 +25,6 @@ export class Simulador {
   public tiempoMaixmoUrgente: number;
   public dineroAcumulado: number;
 
-
   //-------------------Metodo simular
 
   public simular(
@@ -164,7 +163,7 @@ export class Simulador {
 
           // Creamos el objeto paciente.
           let tipo: string = 'Indefinido';
-          let paciente: Paciente = new Paciente(totalPacientes, tipo);
+          let paciente: Paciente = new Paciente(totalPacientes, tipo, 0);
 
           //Preguntamos por el enfermero
           if (enfermero.estaLibre()) {

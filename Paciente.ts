@@ -4,10 +4,13 @@ export class Paciente {
   private id: number;
   private _tipoPaciente: string;
   private estado: EstadoPaciente;
+  private minuto: number;
 
-  public constructor(id: number, tipoPaciente: string) {
+  public constructor(id: number, tipoPaciente: string, min: number) {
     this.id = id;
     this._tipoPaciente = tipoPaciente;
+    this.minuto = min;
+
   }
 
   public esperandoDeterminacion(): void {
@@ -73,6 +76,13 @@ export class Paciente {
   public set TipoPaciente(tipo: string) {
     this._tipoPaciente = tipo;
   }
+
+  public set Minuto(min: number)
+  {
+    this.minuto = min;
+  }
+
+
 
   // public getMinutoLlegada(): number {
   //   return this.minutoLlegada;
