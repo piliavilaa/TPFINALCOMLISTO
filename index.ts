@@ -162,19 +162,19 @@ const simular = () => {
   document.getElementById('txtTiempoMaxU').innerHTML =
     '-->Tiempo máximo de espera para un paciente urgente: ' +
     tiempoMaxU.toFixed(4) +
-    's';
+    ' minutos';
   document.getElementById('txtPromedioU').innerHTML =
     '-->Tiempo promedio de espera para un paciente urgente: ' +
     promedioU.toFixed(4) +
-    's';
+    ' minutos';
   document.getElementById('txtTiempoMaxC').innerHTML =
     '-->Tiempo máximo de espera para un paciente común: ' +
     tiempoMaxC.toFixed(4) +
-    's';
+    ' minutos';
   document.getElementById('txtPromedioC').innerHTML =
     '-->Tiempo promedio de espera para un paciente común: ' +
     promedioC.toFixed(4) +
-    's';
+    ' minutos';
   document.getElementById('txtRecaudacion').innerHTML =
     '-->Dinero acumulado en la simulación: $' + dinero.toString();
 };
