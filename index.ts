@@ -157,12 +157,26 @@ const simular = () => {
   dinero = simulador.dineroAcumulado;
 
   //Cargamos las metricas
-  document.getElementById('txtCantSala').innerHTML += cantidadEnSala.toString();
-  document.getElementById('txtTiempoMaxU').innerHTML += tiempoMaxU.toFixed(4) + 's';
-  document.getElementById('txtPromedioU').innerHTML += promedioU.toFixed(4) + 's';
-  document.getElementById('txtTiempoMaxC').innerHTML += tiempoMaxC.toFixed(4) + 's';
-  document.getElementById('txtPromedioC').innerHTML += promedioC.toFixed(4) + 's';
-  document.getElementById('txtRecaudacion').innerHTML += dinero.toString();
+  document.getElementById('txtCantSala').innerHTML =
+    '-->Cola máxima en sala de espera: ' + cantidadEnSala.toString();
+  document.getElementById('txtTiempoMaxU').innerHTML =
+    '-->Tiempo máximo de espera para un paciente urgente: ' +
+    tiempoMaxU.toFixed(4) +
+    's';
+  document.getElementById('txtPromedioU').innerHTML =
+    '-->Tiempo promedio de espera para un paciente urgente: ' +
+    promedioU.toFixed(4) +
+    's';
+  document.getElementById('txtTiempoMaxC').innerHTML =
+    '-->Tiempo máximo de espera para un paciente común: ' +
+    tiempoMaxC.toFixed(4) +
+    's';
+  document.getElementById('txtPromedioC').innerHTML =
+    '-->Tiempo promedio de espera para un paciente común: ' +
+    promedioC.toFixed(4) +
+    's';
+  document.getElementById('txtRecaudacion').innerHTML =
+    '-->Dinero acumulado en la simulación: $' + dinero.toString();
 };
 
 //-----------------------Metodo de validación de los parámetros del usuario.
