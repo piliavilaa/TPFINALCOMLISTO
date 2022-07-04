@@ -194,6 +194,7 @@ export class Simulador {
           rndTipoPaciente = Math.random();
           tipoPaciente = this.getTipoPaciente(rndTipoPaciente);
           pacienteAtendido.TipoPaciente = tipoPaciente;
+          pacienteAtendido.Minuto = reloj;
 
           //Vemos si la obra social esta disponible
           if (obra.estaLibre()) {
@@ -355,6 +356,9 @@ export class Simulador {
             (paciente) =>
               paciente.getEstado() == EstadoPaciente.SIENDO_ATENDIDO1
           );
+          //calculo tiempo de espera
+          if (pacienteAtendido.getTipoPaciente() == 'Comun') {
+          }
           //vemos si el enfermero esta ocupado
           if (enfermero.estaOcupado()) {
             pacienteAtendido.esperandoPago();
@@ -470,7 +474,7 @@ export class Simulador {
           pacienteAtendido.finalizado();
 
           //DINERO ACUMULADO
-          if (pacienteAtendido.TipoPaciente == 'Urgente') {
+          if (pacienteAtendido.getTipoPaciente() == 'Comun') {
             this.dineroAcumulado += 20;
           } else {
             this.dineroAcumulado += 30;
