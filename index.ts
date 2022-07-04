@@ -78,6 +78,8 @@ let BFinAtencion: number;
 let AFinPago: number;
 let BFinPago: number;
 
+//-----------------------Definición para las metricas.
+
 //-----------------------Funcionalidad------------------------------------------------
 //-----------------------Disparamos la simulación.
 btnSimular.addEventListener('click', () => {
@@ -134,6 +136,8 @@ const simular = () => {
     `La renderización tardó ${performance.now() - startTime} milisegundos`
   );
   HTMLUtils.mostrarSeccion(divTablaSimulacion);
+
+  //Cargamos las metricas
 };
 
 //-----------------------Metodo de validación de los parámetros del usuario.

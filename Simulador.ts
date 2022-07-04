@@ -21,6 +21,10 @@ export class Simulador {
   public cantMaxPacientes: number;
   public probTiposPacientes: number[];
   public tiposPacientes: string[];
+  public tiempoMaximoComun: number;
+  public tiempoMaixmoUrgente: number;
+  public dineroAcumulado: number;
+
 
   //-------------------Metodo simular
 
@@ -115,7 +119,7 @@ export class Simulador {
     let totalPacientesUrgente: number = 0;
     let acuEsperaPacientesComunes: number = 0;
     let totalPacientesComun: number = 0;
-    let acuDineroAtencion: number = 0;
+    this.dineroAcumulado = 0;
     let totalPacientes: number = 0;
     this.cantMaxPacientes = 0;
 
@@ -466,6 +470,13 @@ export class Simulador {
           );
           pacienteAtendido.finalizado();
 
+          //DINERO ACUMULADO
+          if (pacienteAtendido.TipoPaciente == 'Urgente') {
+            this.dineroAcumulado += 20;
+          } else {
+            this.dineroAcumulado += 30;
+          }
+
           //PARA EL QUE SALE DE LA COLA
           //no hay nadie en la cola
           if (colaEnfermero.length === 0) {
@@ -559,7 +570,7 @@ export class Simulador {
           totalPacientesUrgente.toFixed(4),
           acuEsperaPacientesComunes.toFixed(4),
           totalPacientesComun.toFixed(4),
-          acuDineroAtencion.toFixed(4)
+          this.dineroAcumulado.toString()
         );
 
         for (let i: number = 0; i < pacientesEnSistema.length; i++) {
