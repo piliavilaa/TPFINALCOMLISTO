@@ -149,9 +149,7 @@ export class Simulador {
           finAtencion2,
           finPago,
         ];
-        for (let i: number = 0; i < pacientesEnSistema.length; i++) {
-          let paciente: Paciente = pacientesEnSistema[i];
-        }
+
         reloj = Utils.getMenorMayorACero(eventosCandidatos);
         tipoEvento = this.getSiguienteEvento(eventosCandidatos);
       }
