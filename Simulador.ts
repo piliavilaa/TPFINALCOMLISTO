@@ -670,7 +670,8 @@ export class Simulador {
           evento.push(
             pacientesEnSistema[i].getId().toString(),
             pacientesEnSistema[i].getTipoPaciente(),
-            EstadoPaciente[pacientesEnSistema[i].getEstado()]
+            EstadoPaciente[pacientesEnSistema[i].getEstado()],
+            pacientesEnSistema[i].getMinutoLlegada().toFixed(4)
           );
         }
 
