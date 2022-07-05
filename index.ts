@@ -207,8 +207,8 @@ function validarParametros(): boolean {
     );
     return false;
   }
-  if (mediaLlegadaPaciente < 0) {
-    alert('La media no puede ser un valor negativo.');
+  if (mediaLlegadaPaciente <= 0) {
+    alert('La media debe ser un valor mayor a cero');
     return false;
   }
   if (
